@@ -145,7 +145,23 @@ jobs:
           fi
           python scripts/gha/build_testapps.py --t ${{ github.event.inputs.apis }} --p ${{ matrix.target_platform }} --output_directory "${{ github.workspace }}" --noadd_timestamp ${ssl_option}
 
-      - name: Run desktop integration tests
+      - name: Run desktop integration tests-1
+        if: matrix.target_platform == 'Desktop' && !cancelled()
+        run: |
+          python scripts/gha/desktop_tester.py --testapp_dir testapps
+      - name: Run desktop integration tests-2
+        if: matrix.target_platform == 'Desktop' && !cancelled()
+        run: |
+          python scripts/gha/desktop_tester.py --testapp_dir testapps
+      - name: Run desktop integration tests-3
+        if: matrix.target_platform == 'Desktop' && !cancelled()
+        run: |
+          python scripts/gha/desktop_tester.py --testapp_dir testapps
+      - name: Run desktop integration tests-4
+        if: matrix.target_platform == 'Desktop' && !cancelled()
+        run: |
+          python scripts/gha/desktop_tester.py --testapp_dir testapps
+      - name: Run desktop integration tests-5
         if: matrix.target_platform == 'Desktop' && !cancelled()
         run: |
           python scripts/gha/desktop_tester.py --testapp_dir testapps

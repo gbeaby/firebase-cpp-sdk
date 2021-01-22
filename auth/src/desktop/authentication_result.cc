@@ -69,19 +69,27 @@ SignInResult AuthenticationResult::SetAsCurrentUser(
 }
 
 void AuthenticationResult::SignOut(AuthData* const auth_data) {
+  printf("AuthenticationResult::SignOut, auth_data: %p\n", auth_data);
   FIREBASE_ASSERT_RETURN_VOID(auth_data);
 
   // Save the previous user state to be able to check whether listeners should
   // be notified later on.
   UserData previous_user;
   UserView::ClearUser(auth_data, &previous_user);
+  printf("AuthenticationResult::SignOut Clear User returned\n");
 
   if (!previous_user.uid.empty()) {
+    printf("AuthenticationResult::SignOut previous_user user_id not empty\n");
     NotifyAuthStateListeners(auth_data);
+    printf("AuthenticationResult::SignOut NotifyAuthStateListeners returned\n");
   }
+
   if (!previous_user.id_token.empty()) {
+    printf("AuthenticationResult::SignOut previous_user id_token not empty\n");
     NotifyIdTokenListeners(auth_data);
+    printf("AuthenticationResult::SignOut NotifyIdTokenListeners returned\n");
   }
+  printf("AuthenticationResult::SignOut complete\n");
 }
 
 }  // namespace auth
