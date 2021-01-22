@@ -100,7 +100,7 @@ bool FirebaseTest::WaitForCompletion(const firebase::FutureBase& future,
                                      const char* name, int expected_error) {
   app_framework::LogDebug("WaitForCompletion %s", name);
   while (future.status() == firebase::kFutureStatusPending) {
-    app_framework::ProcessEvents(100);
+    app_framework::ProcessEvents(1000);
   }
   EXPECT_EQ(future.status(), firebase::kFutureStatusComplete)
       << name << " returned an invalid status.";
