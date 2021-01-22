@@ -1090,6 +1090,7 @@ TEST_F(FirebaseDatabaseTest, TestInvalidatingReferencesWhenDeletingApp) {
 
   // Deleting App should invalidate all the objects and Futures, same as
   // deleting Database.
+  SignOut();
   delete app_;
   app_ = nullptr;
 
